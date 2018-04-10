@@ -11,21 +11,23 @@
                                 type="text"
                                 id="email"
                                 class="form-control"
-                                v-model="email">
+                                v-model.lazy="userData.email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input
                                 type="password"
                                 id="password"
-                                class="form-control">
+                                class="form-control"
+                                v-model="userData.password">
                     </div>
                     <div class="form-group">
                         <label for="age">Age</label>
                         <input
                                 type="number"
                                 id="age"
-                                class="form-control">
+                                class="form-control"
+                                v-model="userData.age">
                     </div>
 
                 </div>
@@ -37,7 +39,8 @@
                     <textarea
                             id="message"
                             rows="5"
-                            class="form-control"></textarea>
+                            class="form-control"
+                            v-model="message"></textarea>
                 </div>
             </div>
             <div class="row">
@@ -47,13 +50,15 @@
                             <input
                                     type="checkbox"
                                     id="sendmail"
-                                    value="SendMail"> Send Mail
+                                    value="SendMail"
+                                    v-model="sendMail"> Send Mail
                         </label>
                         <label for="sendInfomail">
                             <input
                                     type="checkbox"
                                     id="sendInfomail"
-                                    value="SendInfoMail"> Send Infomail
+                                    value="SendInfoMail"
+                                    v-model="sendMail"> Send Infomail
                         </label>
                     </div>
 
@@ -102,13 +107,13 @@
                         <h4>Your Data</h4>
                     </div>
                     <div class="panel-body">
-                        <p>Mail: {{ email }}</p>
-                        <p>Password:</p>
-                        <p>Age:</p>
-                        <p>Message: </p>
+                        <p>Mail: {{ userData.email }}</p>
+                        <p>Password:{{ userData.password }}</p>
+                        <p>Age:{{ userData.age }}</p>
+                        <p style="white-space: pre">Message: {{ message }}</p>
                         <p><strong>Send Mail?</strong></p>
                         <ul>
-                            <li></li>
+                            <li v-for="mail in sendMail" :key="mail.id">{{ mail }}</li>
                         </ul>
                         <p>Gender:</p>
                         <p>Priority:</p>
@@ -125,38 +130,18 @@ export default {
   name: 'app',
   data() {
     return {
-      email: '',
+      userData: {
+        email: '',
+        password: '',
+        age: 22,
+      },
+      message: 'new text',
+      sendMail: [],
     };
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 
-h1,
-h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
